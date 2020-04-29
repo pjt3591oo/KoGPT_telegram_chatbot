@@ -8,9 +8,10 @@ model, vocab = get_pytorch_kogpt2_model()
 tok = SentencepieceTokenizer(tok_path)
 
 def make_str(receive_str):
+  print('[CALL FUNC] make_str')
   toked = tok(receive_str)
-  while 1 :
-    print(receive_str, clone_receive_str)
+  while True :
+    print(receive_str)
     input_ids = torch.tensor([vocab[vocab.bos_token],]  + vocab[toked]).unsqueeze(0)
     pred = model(input_ids)[0]
     gen = vocab.to_tokens(torch.argmax(pred, axis=-1).squeeze().tolist())[-1]
